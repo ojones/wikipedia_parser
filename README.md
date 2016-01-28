@@ -5,13 +5,13 @@ Uses Wikipedia API to store page id, title, html, wiki text, expanded templates,
 ## Code Example
 
 Instantiate Wikipedia API object with page name or id:
-```
+```python
 # wikipedia id can be digit or name (redirects are handled :)
 page = 'Ada_Lovelace'
 wiki_api = WikipediaAPI(page)
 ```
 Here is the print list of available api resources 
-```
+```python
 > print(dir(wiki_api))
 [   ...
     'categories',
@@ -25,13 +25,13 @@ Here is the print list of available api resources
     'wiki_text']
 ```
 If an infobox is present on page, you can parse the infobox data:
-```
+```python
 # wiki text can be from anywhere, does not need to come from WikipediaAPI object
 wiki_text = wiki_api.wiki_text
 infobox = Infobox(wiki_text)
 ```
 Here is the print list of available attributes 
-```
+```python
 > print(dir(infobox))
 [   ...
     'data',
@@ -42,7 +42,7 @@ Here is the print list of available attributes
 ```
 Infobox "data" is a dict of plain_text (ie no wiki templates), raw_text, and wiki links to other pages. 
 <br>Compare with [Ada_Lovelace](https://en.wikipedia.org/wiki/Ada_Lovelace):
-```
+```python
 {   u'birth_date': {   'plain_text': u'',
                        'raw_text': u'{{birth date|1815|12|10|df=yes}}',
                        'wiki_links': []},
