@@ -40,7 +40,7 @@ Here is the print list of available attributes
     'page_name',
     'template_name']
 ```
-Infobox "data" is a dict of plain_text (ie no wiki templates), raw_text, and wiki links to other pages:
+Infobox "data" is a dict of plain_text (ie no wiki templates), raw_text, and wiki links to other pages. Compare with [Ada_Lovelace](https://en.wikipedia.org/wiki/Ada_Lovelace):
 ```
 {   u'birth_date': {   'plain_text': u'',
                        'raw_text': u'{{birth date|1815|12|10|df=yes}}',
