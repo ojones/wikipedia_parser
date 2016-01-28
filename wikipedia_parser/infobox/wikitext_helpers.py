@@ -1,4 +1,4 @@
-from third_party_adapters import parserfromhell_adapter as adapter
+from wikipedia_parser.third_party_adapters import parserfromhell_adapter as adapter
 
 __author__ = 'oswaldjones'
 

@@ -15,7 +15,7 @@ def is_valid_url(image_url):
     if not image_url:
         return False
 
-    # TODO: this should be in api
+    # TODO: this should be in wikipedia_api
     r = requests.head(image_url)
     # cmn.autolog(image_url + ' : ' + str(r.status_code))
     return r.status_code == requests.codes.ok

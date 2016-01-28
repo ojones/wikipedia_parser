@@ -2,7 +2,7 @@ import re
 
 import mwparserfromhell
 
-from tools import dict_helpers as dict_help
+from wikipedia_parser.tools import dict_helpers as dict_help
 
 
 def templates(wtext, recursive=False):

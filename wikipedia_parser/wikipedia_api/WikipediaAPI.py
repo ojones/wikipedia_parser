@@ -4,14 +4,14 @@
 
 import logging
 
-from third_party_adapters import api_adapters as adapter
-from api import http_calls as fetch
-from api import json_parsers as parse
+from wikipedia_parser.third_party_adapters import api_adapters as adapter
+from wikipedia_parser.wikipedia_api import http_calls as fetch
+from wikipedia_parser.wikipedia_api import json_parsers as parse
 
 logging.getLogger("requests").setLevel(logging.WARNING)
 
 
-class ExternalAPI:
+class WikipediaAPI:
 
     def __init__(self, id, all_http_calls=True):
 

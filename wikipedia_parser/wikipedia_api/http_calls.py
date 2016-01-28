@@ -1,7 +1,8 @@
+from itertools import izip
+
 import requests
 import grequests
 
-from itertools import izip
 import urls
 import json_parsers as parse
 
@@ -31,7 +32,7 @@ def category_search(search_category):
     else:
         params['cmtitle'] = search_category
 
-    r = requests.get('https://en.wikipedia.org/w/api.php', params=params)
+    r = requests.get('https://en.wikipedia.org/w/wikipedia_api.php', params=params)
 
     try:
         data = r.json()
