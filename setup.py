@@ -49,7 +49,7 @@ class Tox(TestCommand):
         sys.exit(errcode)
 
 setup(name='wikipedia_parser',
-      packages=['wikipedia_parser'],
+      packages=find_packages(),
       version='0.1.1',
       description='Fetches wikipedia api resources and parses into data structures',
       author='Oswald Jones',
