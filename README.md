@@ -42,14 +42,12 @@ Here is the print list of available attributes
     'page_name',
     'template_name']
 ```
-Infobox "data" is a dict of plain_text (ie no wiki templates), raw_text, and wiki links. 
-<br>Use 'plain_text' for normal english text.
-<br>Use 'raw_text' to return raw wiki text string for custom parsing.
-<br>Use 'wiki_links' for list of included links to other wikipedia pages.
-<br>Compare with [Ada_Lovelace](https://en.wikipedia.org/wiki/Ada_Lovelace):
+Infobox "data" is a dict with keys and values from wikipedia page's infobox (if page has infobox). 
+<br>Each key field in data returns a dict with values for 'plain_text', 'raw_text', and 'wiki_links'.
+<br>Compare with <a href="https://en.wikipedia.org/wiki/Ada_Lovelace" target="_blank">Ada_Lovelace</a>
 ```python
-{
-u'birth_date': {
+# infobox.data for returns:
+{u'birth_date': {
     'plain_text': u'',
     'raw_text': u'{{birth date|1815|12|10|df=yes}}',
     'wiki_links': []},
@@ -116,13 +114,13 @@ u'title': {
 
 Currently only works on Python 2.7 :(
 ```git
-pip install wikipedia_parser
+$ pip install wikipedia_parser
 ```
 
 ## Tests
 
-```
-> py.text
+```git
+$ py.test
 ```
 
 ## Contributors
