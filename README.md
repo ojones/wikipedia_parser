@@ -46,7 +46,7 @@ Infobox "data" is a dict with keys and values from wikipedia page's infobox (if 
 <br>Each key field in data returns a dict with values for 'plain_text', 'raw_text', and 'wiki_links'.
 <br>Compare with <a href="https://en.wikipedia.org/wiki/Ada_Lovelace" target="_blank">Ada_Lovelace</a>
 ```python
-# infobox.data returns:
+# infobox.data for "Ada_Lovelace" returns:
 {u'birth_date': {
     'plain_text': u'',
     'raw_text': u'{{birth date|1815|12|10|df=yes}}',
