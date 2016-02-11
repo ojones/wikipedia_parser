@@ -50,7 +50,7 @@ class Tox(TestCommand):
 
 setup(name='wikipedia_parser',
       packages=find_packages(),
-      version='0.1.1',
+      version='0.1.2',
       description='Fetches wikipedia api resources and parses into data structures',
       author='Oswald Jones',
       author_email='wakeupoj@gmail.com',
