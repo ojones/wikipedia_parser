@@ -1,8 +1,8 @@
 import re
 
-import clean_text as clean_help
+from wikipedia_parser.infobox import clean_text as clean_help
+from wikipedia_parser.infobox import wikitext_helpers as wtext_help
 from wikipedia_parser.third_party_adapters import parserfromhell_adapter as adapter
-import wikitext_helpers as wtext_help
 
 __author__ = 'oswaldjones'
 

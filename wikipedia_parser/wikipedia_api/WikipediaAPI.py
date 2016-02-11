@@ -13,13 +13,13 @@ logging.getLogger("requests").setLevel(logging.WARNING)
 
 class WikipediaAPI:
 
-    def __init__(self, id, all_http_calls=True):
+    def __init__(self, search_id, all_http_calls=True):
 
-        wobj = adapter.fetch_wobj(id)
+        wobj = adapter.fetch_wobj(search_id)
 
-        self.id = handle_redirect(id, wobj)
+        self.search_id = handle_redirect(search_id, wobj)
 
-        response           = fetch.async_response(self.id)
+        response           = fetch.async_response(self.search_id)
         self.html          = parse.wiki_html(response.get('wiki_html'))
         self.expanded_html = parse.wiki_expanded_templates(response.get('wiki_expanded_html'))
         self.wiki_text     = parse.wiki_text(response.get('wiki_text'))
@@ -32,7 +32,7 @@ class WikipediaAPI:
 
         # these external calls take longer currently not asynchronous
         if all_http_calls:
-            self.categories = adapter.fetch_api_categories(self.id, wobj)
+            self.categories = adapter.fetch_api_categories(self.search_id, wobj)
             self.page_links = adapter.fetch_wobj_pagelinks(wobj)
             self.summary    = adapter.fetch_wobj_summary(wobj)
 

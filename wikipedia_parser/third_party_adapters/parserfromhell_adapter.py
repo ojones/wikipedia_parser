@@ -1,5 +1,4 @@
 import re
-
 import mwparserfromhell
 
 from wikipedia_parser.tools import dict_helpers as dict_help

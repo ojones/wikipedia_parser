@@ -3,12 +3,16 @@ from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 import io
 import codecs
-import os
+from os import path
 import sys
-
 import wikipedia_parser
 
-here = os.path.abspath(os.path.dirname(__file__))
+
+here = path.abspath(path.dirname(__file__))
+
+# Get the long description from the README file
+with io.open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+    long_description = f.read()
 
 
 def read(*filenames, **kwargs):
@@ -20,7 +24,6 @@ def read(*filenames, **kwargs):
             buf.append(f.read())
     return sep.join(buf)
 
-long_description = read('README.txt', 'CHANGES.txt')
 
 class PyTest(TestCommand):
     def finalize_options(self):
@@ -32,6 +35,7 @@ class PyTest(TestCommand):
         import pytest
         errcode = pytest.main(self.test_args)
         sys.exit(errcode)
+
 
 class Tox(TestCommand):
     def finalize_options(self):
@@ -45,26 +49,26 @@ class Tox(TestCommand):
         sys.exit(errcode)
 
 setup(name='wikipedia_parser',
+      packages=['wikipedia_parser'],
       version='0.1.0',
       description='Fetches wikipedia api resources and parses into data structures',
-      url='https://github.com/ojones/wikipedia_parser',
       author='Oswald Jones',
       author_email='wakeupoj@gmail.com',
-      packages=['wikipedia_parser'],
+      url='https://github.com/ojones/wikipedia_parser',
+      download_url='https://github.com/ojones/wikipedia_parser',
       include_package_data=True,
       license='MIT',
       zip_safe=False,
-      tests_require=['pytest'],
-      cmdclass={'test': PyTest},
       test_suite='wikipedia_parser.tests',
-      setup_requires=['nose>=1.0'],
-      tests_require=['tox'],
-      cmdclass={'test': Tox},
+      tests_require=['pytest',
+                     'tox',
+                     ],
+      cmdclass={'test': PyTest},
       install_requires=[
           'requests==2.3.0',
           'grequests==0.2.0',
-          'mwclient==0.7.2',
-          'mwparserfromhell==0.4.2',
+          'mwclient>=0.7.2',
+          'mwparserfromhell>=0.4.2',
           'wikipedia==1.4.0',
           'pytest==2.8.2',
           ],

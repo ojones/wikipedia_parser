@@ -1,6 +1,6 @@
-import wikitext_parser as parse
-import clean_text as clean_help
-import wikitext_helpers as wtext_help
+from wikipedia_parser.infobox import wikitext_parser as parse
+from wikipedia_parser.infobox import clean_text as clean_help
+from wikipedia_parser.infobox import wikitext_helpers as wtext_help
 
 __author__ = 'oswaldjones'
 

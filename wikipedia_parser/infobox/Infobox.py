@@ -1,7 +1,7 @@
-import wikitext_parser as parse
-import image_helpers as image
-import names
-import wikitext_helpers as wtext_help
+from wikipedia_parser.infobox import wikitext_parser as parse
+from wikipedia_parser.infobox import image_helpers as image
+from wikipedia_parser.infobox import names
+from wikipedia_parser.infobox import wikitext_helpers as wtext_help
 
 __author__ = 'oswaldjones'
 

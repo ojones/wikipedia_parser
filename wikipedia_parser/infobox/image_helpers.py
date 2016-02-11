@@ -1,6 +1,6 @@
 import hashlib
 import requests
-import wikitext_parser as parse
+from wikipedia_parser.infobox import wikitext_parser as parse
 
 __author__ = 'oswaldjones'
 
