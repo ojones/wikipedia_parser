@@ -6,9 +6,10 @@ Uses Wikipedia API to store page id, title, html, wiki text, expanded templates,
 
 Instantiate Wikipedia API object with page name or id:
 ```python
-# wikipedia id can be digit or name (redirects are handled :)
-page = 'Ada_Lovelace'
-wiki_api = WikipediaAPI(page)
+from wikipedia_parser.wikipedia_api import WikipediaAPI
+# wikipedia search id can be digit or name (redirects are handled :)
+search_id = 'Ada_Lovelace'
+wiki_api = WikipediaAPI(search_id)
 ```
 Here is the print list of available api resources 
 ```python
@@ -26,6 +27,7 @@ Here is the print list of available api resources
 ```
 If an infobox is present on page, you can parse the infobox data:
 ```python
+from wikipedia_parser.infobox import Infobox
 # wiki text can be from anywhere, does not need to come from WikipediaAPI object
 wiki_text = wiki_api.wiki_text
 infobox = Infobox(wiki_text)
@@ -40,53 +42,71 @@ Here is the print list of available attributes
     'page_name',
     'template_name']
 ```
-Infobox "data" is a dict of plain_text (ie no wiki templates), raw_text, and wiki links to other pages. 
+Infobox "data" is a dict of plain_text (ie no wiki templates), raw_text, and wiki links. 
+<br>Use 'plain_text' for normal english text.
+<br>Use 'raw_text' to return raw wiki text string for custom parsing.
+<br>Use 'wiki_links' for list of included links to other wikipedia pages.
 <br>Compare with [Ada_Lovelace](https://en.wikipedia.org/wiki/Ada_Lovelace):
 ```python
-{   u'birth_date': {   'plain_text': u'',
-                       'raw_text': u'{{birth date|1815|12|10|df=yes}}',
-                       'wiki_links': []},
-    u'birth_name': {   'plain_text': u'The Hon. Augusta Ada Byron',
-                       'raw_text': u'The Hon. Augusta Ada Byron',
-                       'wiki_links': []},
-    u'birth_place': {   'plain_text': u'London, England',
-                        'raw_text': u'London, England',
-                        'wiki_links': []},
-    u'caption': {   'plain_text': u'Ada, Countess of Lovelace, 1840',
-                    'raw_text': u'Ada, Countess of Lovelace, 1840',
-                    'wiki_links': []},
-    u'children': {   'plain_text': u'',
-                     'raw_text': u'{{plainlist |\n* [[Byron King-Noel, Viscount Ockham|Byron King-Noel, Viscount Ockham and 12th Baron Wentworth]]\n* [[Anne Blunt, 15th Baroness Wentworth]]\n* [[Ralph King-Milbanke, 2nd Earl of Lovelace]]}}',
-                     'wiki_links': [   u'Byron King-Noel, Viscount Ockham',
-                                       u'Anne Blunt, 15th Baroness Wentworth',
-                                       u'Ralph King-Milbanke, 2nd Earl of Lovelace']},
-    u'death_date': {   'plain_text': u'',
-                       'raw_text': u'{{death date and age|1852|11|27|1815|12|10|df=yes}}',
-                       'wiki_links': []},
-    u'death_place': {   'plain_text': u'Marylebone, London, England',
-                        'raw_text': u'[[Marylebone]], London, England',
-                        'wiki_links': [u'Marylebone']},
-    u'field': {   'plain_text': u'Mathematics, computing',
-                  'raw_text': u'Mathematics, computing',
-                  'wiki_links': []},
-    u'image': {   'plain_text': u'Ada Lovelace portrait.jpg',
-                  'raw_text': u'Ada Lovelace portrait.jpg',
-                  'wiki_links': []},
-    u'name': {   'plain_text': u'Ada, Countess of Lovelace',
-                 'raw_text': u'Ada, Countess of Lovelace',
-                 'wiki_links': []},
-    u'parents': {   'plain_text': u'',
-                    'raw_text': u'{{plainlist |\n* [[Lord Byron|George Gordon Byron, 6th Baron Byron]]\n* [[Anne Isabella Byron, Baroness Byron|Anne Isabella Milbanke, 11th Baroness Wentworth]]\n  }}',
-                    'wiki_links': [u'Lord Byron', u'Anne Isabella Byron, Baroness Byron']},
-    u'resting_place': {   'plain_text': u'Church of St. Mary Magdalene, Hucknall, Nottingham, England',
-                          'raw_text': u'[[Church of St. Mary Magdalene, Hucknall]], Nottingham, England',
-                          'wiki_links': [u'Church of St. Mary Magdalene, Hucknall']},
-    u'spouse': {   'plain_text': u'William King-Noel, 1st Earl of Lovelace',
-                   'raw_text': u'[[William King-Noel, 1st Earl of Lovelace]]',
-                   'wiki_links': [u'William King-Noel, 1st Earl of Lovelace']},
-    u'title': {   'plain_text': u'Countess of Lovelace',
-                  'raw_text': u'Countess of Lovelace',
-                  'wiki_links': []}}
+{
+u'birth_date': {
+    'plain_text': u'',
+    'raw_text': u'{{birth date|1815|12|10|df=yes}}',
+    'wiki_links': []},
+u'birth_name': {
+    'plain_text': u'The Hon. Augusta Ada Byron',
+    'raw_text': u'The Hon. Augusta Ada Byron',
+    'wiki_links': []},
+u'birth_place': {
+    'plain_text': u'London, England',
+    'raw_text': u'London, England',
+    'wiki_links': []},
+u'caption': {
+    'plain_text': u'Ada, Countess of Lovelace, 1840',
+    'raw_text': u'Ada, Countess of Lovelace, 1840',
+    'wiki_links': []},
+u'children': {
+    'plain_text': u'',
+    'raw_text': u'{{plainlist |\n* [[Byron King-Noel, Viscount Ockham|Byron King-Noel, Viscount Ockham and 12th Baron Wentworth]]\n* [[Anne Blunt, 15th Baroness Wentworth]]\n* [[Ralph King-Milbanke, 2nd Earl of Lovelace]]}}',
+    'wiki_links': [u'Byron King-Noel, Viscount Ockham',
+                   u'Anne Blunt, 15th Baroness Wentworth',
+                   u'Ralph King-Milbanke, 2nd Earl of Lovelace']},
+u'death_date': {
+    'plain_text': u'',
+    'raw_text': u'{{death date and age|1852|11|27|1815|12|10|df=yes}}',
+    'wiki_links': []},
+u'death_place': {
+    'plain_text': u'Marylebone, London, England',
+    'raw_text': u'[[Marylebone]], London, England',
+    'wiki_links': [u'Marylebone']},
+u'field': {
+    'plain_text': u'Mathematics, computing',
+    'raw_text': u'Mathematics, computing',
+    'wiki_links': []},
+u'image': {
+    'plain_text': u'Ada Lovelace portrait.jpg',
+    'raw_text': u'Ada Lovelace portrait.jpg',
+    'wiki_links': []},
+u'name': {
+    'plain_text': u'Ada, Countess of Lovelace',
+    'raw_text': u'Ada, Countess of Lovelace',
+    'wiki_links': []},
+u'parents': {
+    'plain_text': u'',
+    'raw_text': u'{{plainlist |\n* [[Lord Byron|George Gordon Byron, 6th Baron Byron]]\n* [[Anne Isabella Byron, Baroness Byron|Anne Isabella Milbanke, 11th Baroness Wentworth]]\n  }}',
+    'wiki_links': [u'Lord Byron', u'Anne Isabella Byron, Baroness Byron']},
+u'resting_place': {
+    'plain_text': u'Church of St. Mary Magdalene, Hucknall, Nottingham, England',
+    'raw_text': u'[[Church of St. Mary Magdalene, Hucknall]], Nottingham, England',
+    'wiki_links': [u'Church of St. Mary Magdalene, Hucknall']},
+u'spouse': {
+    'plain_text': u'William King-Noel, 1st Earl of Lovelace',
+    'raw_text': u'[[William King-Noel, 1st Earl of Lovelace]]',
+    'wiki_links': [u'William King-Noel, 1st Earl of Lovelace']},
+u'title': {
+    'plain_text': u'Countess of Lovelace',
+    'raw_text': u'Countess of Lovelace',
+    'wiki_links': []}}
 ```
 ## Motivation
 
@@ -95,8 +115,8 @@ Infobox "data" is a dict of plain_text (ie no wiki templates), raw_text, and wik
 ## Installation
 
 Currently only works on Python 2.7 :(
-```
-> python setup.py install
+```git
+pip install wikipedia_parser
 ```
 
 ## Tests
