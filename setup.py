@@ -65,7 +65,7 @@ setup(name='wikipedia_parser',
                      ],
       cmdclass={'test': PyTest},
       install_requires=[
-          'requests==2.3.0',
+          'requests==2.20.0',
           'grequests==0.2.0',
           'mwclient>=0.7.2',
           'mwparserfromhell>=0.4.2',
